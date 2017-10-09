@@ -7,17 +7,15 @@
             [jet.page :refer [Page]]
             [schema.core :as s]))
 
-(defn link-script*
+(defn ^:private link-script*
   [self attrs url]
-  (update self :scripts #(conj % (html [:script (assoc (jet.core/<-attrs attrs)
-                                                     :src url)]))))
+  (update self :head #(conj % (html [:script (assoc (jet.core/<-attrs attrs)
+                                                    :src url)]))))
 
 (s/defrecord Html5Page [charset :- s/Str
                         language :- s/Str
                         title :- (s/maybe s/Str)
                         head :- [s/Str]
-                        scripts :- [s/Str]
-                        styles :- [s/Str]
                         body :- [s/Str]]
   Widget
   (to-head [self html]
@@ -28,7 +26,7 @@
   (set-title [self title]
     (assoc self :title title))
   (embed-style [self text]
-    (update self :styles #(conj % text)))
+    (update self :head #(conj % text)))
   (embed-style [self attrs text]
     (update self :head #(conj % (html [:style (jet.core/<-attrs attrs) text]))))
   (link-style [self attrs url]
@@ -42,14 +40,9 @@
 
   Page
   (render-html [self]
-    (let [styles' (->> styles
-                       str/join
-                       css/compress)
-          head' (concat [(html [:meta {:charset charset}])
+    (let [head' (concat [(html [:meta {:charset charset}])
                          (html [:title {} title])]
-                        scripts
-                        head
-                        styles')]
+                        head)]
       (str "<!doctype html>
 <html lang=\"" language "\">"
            (html [:head {} (str/join head')])
@@ -58,4 +51,4 @@
 
 (defn page
   [encoding language]
-  (Html5Page. encoding language nil [] [] [] []))
+  (Html5Page. encoding language nil [] []))

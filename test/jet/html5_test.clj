@@ -6,28 +6,7 @@
             [jet :refer :all]
             jet.page
             jet.html5
-            [tempfile.core :refer [tempfile with-tempfile]]))
-
-(defn <-sh
-  [result]
-  (if (> (:exit result) 0)
-    (throw (ex-info (:err result) result))
-    (:out result)))
-
-(defn tidy
-  [txt]
-  (<-sh (sh "tidy" "-" "--sort-attributes" "alpha" :in txt)))
-
-(defn diff
-  [lhs rhs]
-  (with-tempfile [lhs-file (tempfile lhs)
-                  rhs-file (tempfile rhs)]
-    (let [result (<-sh (sh "diff" (.getPath lhs-file) (.getPath rhs-file)))]
-      (= "" result))))
-
-(defn equals?
-  [lhs rhs]
-  (true? (diff (tidy lhs) (tidy rhs))))
+            [jet.test :refer :all]))
 
 (def empty-html-doc "<!doctype html>
 <html lang=\"en\">
