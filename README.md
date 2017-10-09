@@ -31,9 +31,9 @@ Developers who have become frustrated with building server-generated web sites u
 
 `Jet` is a clone of the Widget pattern as implemented in the super-awesome [Yesod Web Framework|https://www.yesodweb.com/book/widgets]
 
-# Usage
+## Usage
 
-## Initialization
+### Initialization
 
 The main entry-point for constructing a Jet page looks like this:
 
@@ -50,7 +50,7 @@ The main entry-point for constructing a Jet page looks like this:
 
 the `jet.page` namespace is only required at this high level. From here on its widgets all the way down.
 
-## Widgets
+### Widgets
 
 Our `my-widget` function is our first example of a widget.
 
@@ -59,7 +59,7 @@ Typically widgets will take additional parameters but here we're keeping it simp
 
 Our widget can now start generating Html, CSS, Javascript or metadata.
 
-### Delegation
+#### Delegation
 
 We can compose widgets from other widgets here for example we describe a page by delegating to header, content and footer widgets.
 
@@ -75,7 +75,7 @@ We can compose widgets from other widgets here for example we describe a page by
       footer))
 ```
 
-### Generating Content
+#### Generating Content
 
 To generate content we invoke methods on the Widget protocol.
 
