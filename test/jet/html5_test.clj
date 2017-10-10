@@ -38,3 +38,11 @@
                    jet.page/render-html)
         expected (str/replace empty-html-doc #"</head>" (str element "</head>"))]
     (is (equals? expected actual))))
+
+(deftest to-body-test
+  (let [element (html [:a {:href "http://xkcd.com"} "xkcd"])
+        actual (-> (jet.html5/page "utf-8" "en") 
+                   (to-body element)
+                   jet.page/render-html)
+        expected (str/replace empty-html-doc #"<body>" (str "<body>" element))]
+    (is (equals? expected actual))))
