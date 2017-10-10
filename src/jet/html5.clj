@@ -7,11 +7,6 @@
             [jet.page :refer [Page]]
             [schema.core :as s]))
 
-(defn ^:private link-script*
-  [self attrs url]
-  (update self :head #(conj % (html [:script (assoc (jet.core/<-attrs attrs)
-                                                    :src url)]))))
-
 (defn ^:private link-style*
   [self attrs url]
   (let [attrs' (merge {:rel "stylesheet" :type "text/css"} attrs)]
@@ -21,6 +16,11 @@
 (defn ^:private embed-script*
   [self attrs text]
   (update self :body #(conj % (html [:script (jet.core/<-attrs attrs) text]))))
+
+(defn ^:private link-script*
+  [self attrs url]
+  (update self :head #(conj % (html [:script (assoc (jet.core/<-attrs attrs)
+                                                    :src url)]))))
 
 (s/defrecord Html5Page [charset :- s/Str
                         language :- s/Str
