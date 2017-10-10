@@ -116,3 +116,17 @@ Here is the widget protocol in its entirety:
 | link-script       | [url]               | Add a link to a remote javascript file                        |
 
 ```
+
+## Contributing
+
+### Building
+
+The development environment is configured using [nix|https://nixos.org/nix/].
+
+Simply install `nix` for your operating system and from within a shell run:
+
+``` sh
+nix-shell --pure
+```
+
+`nix` will read the `shell.nix` file and load the required dependencies.
