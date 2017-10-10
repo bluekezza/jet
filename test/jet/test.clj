@@ -10,7 +10,8 @@
   (if (> (:exit result) 0)
     (do
       (binding [*out* *err*]
-        (println (:err result)))
+        (println (:err result))
+        (println (:out result)))
       (throw (ex-info (:err result) result)))
     (:out result)))
 
