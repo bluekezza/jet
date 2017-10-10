@@ -30,3 +30,11 @@
                    jet.page/render-html)
         expected (str/replace empty-html-doc (re-pattern (html [:title])) (html [:title title]))]
     (is (equals? expected actual))))
+
+(deftest to-head-test
+  (let [element (html [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}])
+        actual (-> (jet.html5/page "utf-8" "en") 
+                   (to-head element)
+                   jet.page/render-html)
+        expected (str/replace empty-html-doc #"</head>" (str element "</head>"))]
+    (is (equals? expected actual))))
