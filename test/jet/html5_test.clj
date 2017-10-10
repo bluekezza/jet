@@ -99,3 +99,21 @@ window.alert(\"Hello, world!\");
         element (html [:script {:type "text/javascript"} javascript-code])
         expected (str/replace empty-html-doc #"<body>" (str "<body>" element))]
     (is (equals? expected actual))))
+
+(deftest link-script-test
+  (let [url "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+        actual (-> (jet.html5/page "utf-8" "en") 
+                   (link-script url)
+                   jet.page/render-html)
+        element (html [:script {:src url}])
+        expected (str/replace empty-html-doc #"</head>" (str element "</head>"))]
+    (is (equals? expected actual))))
+
+(deftest link-script-attrs-test
+  (let [url "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+        actual (-> (jet.html5/page "utf-8" "en") 
+                   (link-script {:defer "defer"} url)
+                   jet.page/render-html)
+        element (html [:script {:defer "defer" :src url}])
+        expected (str/replace empty-html-doc #"</head>" (str element "</head>"))]
+    (is (equals? expected actual))))
