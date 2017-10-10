@@ -39,7 +39,9 @@ The main entry-point for constructing a Jet page looks like this:
 
 ``` clojure
 (ns my-app.core
-  (:require jet.page))
+  (:require [jet :refer :all]
+            jet.page
+            jet.html5))
 
 (defn process
   []
