@@ -12,6 +12,12 @@
   (update self :head #(conj % (html [:script (assoc (jet.core/<-attrs attrs)
                                                     :src url)]))))
 
+(defn ^:private link-style*
+  [self attrs url]
+  (let [attrs' (merge {:rel "stylesheet" :type "text/css"} attrs)]
+    (update self :head #(conj % (html [:link (assoc (jet.core/<-attrs attrs')
+                                                    :href url)])))))
+
 (s/defrecord Html5Page [charset :- s/Str
                         language :- s/Str
                         title :- (s/maybe s/Str)
@@ -29,8 +35,10 @@
     (update self :head #(conj % (html [:style text]))))
   (embed-style [self attrs text]
     (update self :head #(conj % (html [:style (jet.core/<-attrs attrs) text]))))
+  (link-style [self url]
+    (link-style* self {} url))
   (link-style [self attrs url]
-    self)
+    (link-style* self attrs url))
   (embed-script [self attrs text]
     self)
   (link-script [self url]

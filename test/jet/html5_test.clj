@@ -63,3 +63,21 @@
                    jet.page/render-html)
         expected (str/replace empty-html-doc #"</head>" (str (html [:style attrs css]) "</head>"))]
     (is (equals? expected actual))))
+
+(deftest link-style-test
+  (let [actual (-> (jet.html5/page "utf-8" "en") 
+                   (link-style "theme.css")
+                   jet.page/render-html)
+        element (html [:link {:rel "stylesheet" :type "text/css" :href "theme.css"}])
+        expected (str/replace empty-html-doc #"</head>" (str element "</head>"))]
+    (is (equals? expected actual))))
+
+(deftest link-style-attrs-test
+  (let [actual (-> (jet.html5/page "utf-8" "en") 
+                   (link-style {:media "print"} "theme.css")
+                   jet.page/render-html)
+        element (html [:link {:rel "stylesheet" :type "text/css" :media "print" :href "theme.css"}])
+        expected (str/replace empty-html-doc #"</head>" (str element "</head>"))]
+    (is (equals? expected actual))))
+
+    

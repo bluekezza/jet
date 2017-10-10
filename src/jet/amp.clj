@@ -52,6 +52,8 @@
     (update self :styles #(conj % text)))
   (embed-style [self attrs text]
     (update self :head #(conj % (html [:style (jet.core/<-attrs attrs) text]))))
+  (link-style [self url]
+    self)
   (link-style [self attrs url]
     self)
   (embed-script [self attrs text]
