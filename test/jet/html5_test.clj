@@ -46,3 +46,20 @@
                    jet.page/render-html)
         expected (str/replace empty-html-doc #"<body>" (str "<body>" element))]
     (is (equals? expected actual))))
+
+(deftest embed-style-test
+  (let [css "body { border: 1px; }"
+        actual (-> (jet.html5/page "utf-8" "en") 
+                   (embed-style css)
+                   jet.page/render-html)
+        expected (str/replace empty-html-doc #"</head>" (str (html [:style css]) "</head>"))]
+    (is (equals? expected actual))))
+
+(deftest embed-style-attrs-test
+  (let [css "body { border: 1px; }"
+        attrs {:class "loggable"}
+        actual (-> (jet.html5/page "utf-8" "en") 
+                   (embed-style attrs css)
+                   jet.page/render-html)
+        expected (str/replace empty-html-doc #"</head>" (str (html [:style attrs css]) "</head>"))]
+    (is (equals? expected actual))))

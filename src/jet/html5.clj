@@ -26,7 +26,7 @@
   (set-title [self title]
     (assoc self :title title))
   (embed-style [self text]
-    (update self :head #(conj % text)))
+    (update self :head #(conj % (html [:style text]))))
   (embed-style [self attrs text]
     (update self :head #(conj % (html [:style (jet.core/<-attrs attrs) text]))))
   (link-style [self attrs url]
