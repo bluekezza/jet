@@ -18,6 +18,10 @@
     (update self :head #(conj % (html [:link (assoc (jet.core/<-attrs attrs')
                                                     :href url)])))))
 
+(defn ^:private embed-script*
+  [self attrs text]
+  (update self :body #(conj % (html [:script (jet.core/<-attrs attrs) text]))))
+
 (s/defrecord Html5Page [charset :- s/Str
                         language :- s/Str
                         title :- (s/maybe s/Str)
@@ -39,8 +43,10 @@
     (link-style* self {} url))
   (link-style [self attrs url]
     (link-style* self attrs url))
+  (embed-script [self text]
+    (embed-script* self {} text))
   (embed-script [self attrs text]
-    self)
+    (embed-script* self attrs text))
   (link-script [self url]
     (link-script* self {} url))
   (link-script [self attrs url]

@@ -80,4 +80,22 @@
         expected (str/replace empty-html-doc #"</head>" (str element "</head>"))]
     (is (equals? expected actual))))
 
-    
+(def javascript-code "(function (){
+window.alert(\"Hello, world!\");
+})")
+
+(deftest embed-script-test
+  (let [actual (-> (jet.html5/page "utf-8" "en") 
+                   (embed-script javascript-code )
+                   jet.page/render-html)
+        element (html [:script javascript-code])
+        expected (str/replace empty-html-doc #"<body>" (str "<body>" element))]
+    (is (equals? expected actual))))
+
+(deftest embed-script-attrs-test
+  (let [actual (-> (jet.html5/page "utf-8" "en") 
+                   (embed-script {:type "text/javascript"} javascript-code)
+                   jet.page/render-html)
+        element (html [:script {:type "text/javascript"} javascript-code])
+        expected (str/replace empty-html-doc #"<body>" (str "<body>" element))]
+    (is (equals? expected actual))))

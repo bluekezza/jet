@@ -56,6 +56,8 @@
     self)
   (link-style [self attrs url]
     self)
+  (embed-script [self text]
+    self)
   (embed-script [self attrs text]
     self)
   (link-script [self url]
