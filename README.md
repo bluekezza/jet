@@ -10,20 +10,20 @@ Developers who have become frustrated with building server-generated web sites u
 
 * Jet is a library for server-generated Html pages
 * It relies on a widget protocol to encapsulate all facets of a UI component including:
- * html
- * css
- * javascript
- * metadata
+  * html
+  * css
+  * javascript
+  * metadata
 * Widgets can be written in isolation then re-used for different page specs such as:
- * html4
- * html5
- * [AMP](https://www.ampproject.org/)
+  * html4
+  * html5
+  * [AMP](https://www.ampproject.org/)
 * Why do we need it?
- * existing approaches such as templates, when used to manage the page, cause the elements of a widget to fragment across the code base, such that:
-  * Html is added as a mustache template file invoked by a parent mustache template
-  * Css styles are added as a separate css file linked by the mustache template
-  * Javascript is either linked to or written in the head of the parent mustache template
-  * Business logic manages the controller and view-model to populate the mustache template
+  * existing approaches such as templates, when used to manage the page, cause the elements of a widget to fragment across the code base, such that:
+    * Html is added as a mustache template file invoked by a parent mustache template
+    * Css styles are added as a separate css file linked by the mustache template
+    * Javascript is either linked to or written in the head of the parent mustache template
+    * Business logic manages the controller and view-model to populate the mustache template
 * Fragmentation increases the complexity of managing medium to large-scale web sites.
 * Jet reduces complexity by encapsulating all widget code behind a single abstraction, the [Jet.widget]() protocol.
 
