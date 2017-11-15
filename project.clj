@@ -1,4 +1,4 @@
-(defproject jet "0.1.0-SNAPSHOT"
+(defproject jet "0.1.0"
   :description "Jet Html page builder"
   :min-lein-version "2.0.0"
   :license {:name "MIT License"
