@@ -11,4 +11,5 @@
    [clj-stable-pprint "0.0.3"]
    [hiccup "1.0.5"]
    [prismatic/schema "1.1.6"]]
-  :profiles {:dev {:dependencies [[tempfile "0.2.0"]]}})
+  :profiles {:dev {:dependencies [[tempfile "0.2.0"]]}}
+  :deploy-repositories [["clojars" {:sign-releases false}]])
